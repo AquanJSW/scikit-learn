@@ -39,3 +39,10 @@ cdef void _ger(BLAS_Order, int, int, floating, const floating*, int, const float
 cdef void _gemm(BLAS_Order, BLAS_Trans, BLAS_Trans, int, int, int, floating,
                 const floating*, int, const floating*, int, floating, floating*,
                 int) noexcept nogil
+"""
+This is just a declaration.
+The scikit-learn source code seems doesn't contain the corresponding implementation.
+So, where is the implementation?
+---
+According to meson.build, the implementation may be in the OpenMP library.
+"""

@@ -105,6 +105,7 @@ def lloyd_iter_chunked_dense(
         omp_lock_t lock
 
     # count remainder chunk in total number of chunks
+    # curiously, why not using n_samples_rem directly?: n_chunks += n_samples_rem > 0
     n_chunks += n_samples != n_chunks * n_samples_chunk
 
     # number of threads should not be bigger than number of chunks
@@ -203,6 +204,9 @@ cdef void _update_chunk_dense(
           1.0, pairwise_distances, n_clusters)
 
     for i in range(n_samples):
+
+        # Apparently, the comparison doesn't involve ||X||^2, just as the
+        # comment above.
         min_sq_dist = pairwise_distances[i * n_clusters]
         label = 0
         for j in range(1, n_clusters):
